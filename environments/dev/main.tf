@@ -40,15 +40,13 @@ module "firewall" {
   subnet  = "${module.vpc.subnet}"
 }
 
-resource "google_compute_firewall_policy" "test_policy"
-{
+resource "google_compute_firewall_policy" "test_policy" {
   parent	= "${var.project}"
   short_name	= "20230320_testpolicy"
   description	= "Test Policy"
 }
 
-resource "google_compute_firewall_policy_rule" "test_policy_rule"
-{
+resource "google_compute_firewall_policy_rule" "test_policy_rule" {
   firewall_policy 	= google_compute_firewall_policy.test_policy.id
   description 		= "Test Policy Rule"
   priority 		= 9000
