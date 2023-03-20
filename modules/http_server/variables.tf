@@ -15,4 +15,4 @@
 
 variable "project" {}
 variable "subnet" {}
-variable "desired_state" {}
+variable "desired_status" {}
