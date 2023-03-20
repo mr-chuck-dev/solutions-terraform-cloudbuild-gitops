@@ -55,6 +55,7 @@ resource "google_compute_firewall_policy_rule" "test_policy_rule" {
   action 		= "allow"
   direction 		= "INGRESS"
   disabled 		= false
+  target_resources	= "{module.vpc}"
   match {
     layer4_configs {
       ip_protocol = "tcp"
