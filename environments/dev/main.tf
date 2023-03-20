@@ -42,9 +42,10 @@ module "firewall" {
 }
 
 resource "google_compute_firewall_policy" "test_policy" {
-  parent	= "organizations/490866986856"
-  short_name	= "testpolicy"
-  description	= "Test Policy"
+  parent		= "organizations/490866986856"
+  short_name		= "testpolicy"
+  description		= "Test Policy"
+  target_resources	= "${module.vpc.subnet}"
 }
 
 resource "google_compute_firewall_policy_rule" "test_policy_rule" {
@@ -55,7 +56,6 @@ resource "google_compute_firewall_policy_rule" "test_policy_rule" {
   action 		= "allow"
   direction 		= "INGRESS"
   disabled 		= false
-  target_resources	= "${module.vpc}"
   match {
     layer4_configs {
       ip_protocol = "tcp"
