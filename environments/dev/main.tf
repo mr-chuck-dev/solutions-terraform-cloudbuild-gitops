@@ -41,7 +41,7 @@ module "firewall" {
 }
 
 resource "google_compute_firewall_policy" "test_policy" {
-  parent	= "${var.project}"
+  parent	= "organizations/490866986856/${var.project}"
   short_name	= "testpolicy"
   description	= "Test Policy"
 }
