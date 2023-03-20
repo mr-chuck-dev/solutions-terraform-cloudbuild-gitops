@@ -31,6 +31,7 @@ module "http_server" {
   source  = "../../modules/http_server"
   project = "${var.project}"
   subnet  = "${module.vpc.subnet}"
+  desired_status = "TERMINATED"
 }
 
 module "firewall" {
