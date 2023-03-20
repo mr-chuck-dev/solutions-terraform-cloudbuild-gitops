@@ -39,3 +39,28 @@ module "firewall" {
   project = "${var.project}"
   subnet  = "${module.vpc.subnet}"
 }
+
+resource "google_compute_firewall_policy" "test_policy"
+{
+  parent	= "${var.project}"
+  short_name	= "20230320_testpolicy"
+  description	= "Test Policy"
+}
+
+resource "google_compute_firewall_policy_rule" "test_policy_rule"
+{
+  firewall_policy 	= google_compute_firewall_policy.test_policy.id
+  description 		= "Test Policy Rule"
+  priority 		= 9000
+  enable_logging 	= true
+  action 		= "allow"
+  direction 		= "INGRESS"
+  disabled 		= false
+  match {
+    layer4_configs {
+      ip_protocol = "tcp"
+      ports = [1521, 3306]
+    }
+    dest_ip_ranges = ["0.0.0.0/0"]
+  }
+}
