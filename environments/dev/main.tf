@@ -55,7 +55,6 @@ resource "google_compute_firewall_policy_rule" "test_policy_rule" {
   action 		= "allow"
   direction 		= "INGRESS"
   disabled 		= false
-  target_resources	= ["${module.vpc.network}"]
   match {
     layer4_configs {
       ip_protocol = "tcp"
@@ -64,3 +63,11 @@ resource "google_compute_firewall_policy_rule" "test_policy_rule" {
     src_ip_ranges = ["0.0.0.0/0"]
   }
 }
+
+resource "google_compute_network_firewall_policy_association" "test_policy_association" {
+  name			= "dev_association"
+  project		= "${var.project}"
+  firewall_policy	= google_compute_firewall_policy.test_policy.id
+  attachment_target	= "{module.vpc.network}"
+
+
