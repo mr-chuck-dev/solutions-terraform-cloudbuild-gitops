@@ -60,6 +60,6 @@ resource "google_compute_firewall_policy_rule" "test_policy_rule" {
       ip_protocol = "tcp"
       ports = [1521, 3306]
     }
-    dest_ip_ranges = ["0.0.0.0/0"]
+    src_ip_ranges = ["0.0.0.0/0"]
   }
 }
